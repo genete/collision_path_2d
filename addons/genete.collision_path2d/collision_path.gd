@@ -14,12 +14,12 @@ func _ready():
 	pass
 
 func _draw():
-	if get_tree().is_editor_hint() and enabled:
+	if Engine.editor_hint and enabled:
 		var collision_node=get_parent()
-		if collision_node extends CollisionPolygon2D:
+		if collision_node is CollisionPolygon2D:
 			var curve = get_curve()
 			if curve and (curve.get_point_count() > 1):
-				collision_node.set_polygon(curve.tesselate(max_stages, tolerance_degrees))
+				collision_node.set_polygon(curve.tessellate(max_stages, tolerance_degrees))
 			if draw_points:
 				var polygon = collision_node.get_polygon()
 				if polygon.size():
